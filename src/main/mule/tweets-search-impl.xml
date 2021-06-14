@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:validation="http://www.mulesoft.org/schema/mule/validation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd">
+	
+	<sub-flow name="tweets-search-impl-subflow" doc:id="a9d77eaa-3ebd-434f-99e3-b3ed44ee0fbe" >
+		<logger level="INFO" doc:name="Log Start" doc:id="e5faecd4-9e7b-47fa-80ad-479a6e8c64e2" message="Processing the request...." category="com.bofa.api.twitter-demo"/>
+		<set-variable value="#[attributes.queryParams]" doc:name="save queryParams" doc:id="5e54e2e2-f1bb-402e-9f9d-ff92e33ac287" variableName="queryParams"/>
+		<logger level="DEBUG" doc:name="Log Input Params" doc:id="52a1f218-2870-444f-866d-c481058abc80" message="Received Input Params are: #[vars.queryParams]" category="com.bofa.api.twitter-demo" />
+		<validation:is-not-blank-string doc:name="Is queryString blank?" doc:id="f81c8d15-0d6a-418e-9fe7-060b41b2dc63" value="#[vars.queryParams.queryString]" message="queryString is blank"/>
+		<http:request method="GET" doc:name="Call Twitter API" doc:id="f491e570-5ece-40b3-bc3b-2ad391be87ae" config-ref="HTTPS_Request_configuration" path="/${twitter.version}/${twitter.path}" sendCorrelationId="ALWAYS">
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"Authorization" : "Bearer " ++ p('twitter.token')
+}]]]></http:headers>
+			<http:query-params ><![CDATA[#[output application/java
+var qp = vars.queryParams
+---
+{
+	"q" : qp.queryString,
+	"count": qp.count,
+	"tweet_mode": p('twitter.tweet_mode'),
+	"result_type": qp.result_type default p('twitter.result_type')
+}]]]></http:query-params>
+		</http:request>
+		<ee:transform doc:name="Prepare JSON Response" doc:id="899cfcb4-edfd-4cb7-b45c-64e09c67ad0c">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+
+type Dformat = DateTime {format: "E MMM dd HH:mm:ss xx yyyy"}
+
+var noOfHours = vars.queryParams.noOfHours default 0
+var current = now() as Dformat
+var reqDatetime = current - ("PT$(noOfHours)H" as Period)
+
+---
+{
+	tweets: payload.statuses filter (($.created_at as Dformat) > reqDatetime) map ( tweet , indexOfStatus ) -> {
+		text: tweet.full_text,
+		url: "https://twitter.com/demomuleapi/status/" ++ tweet.id_str,
+		screenname: tweet.user.screen_name,
+		created_at: tweet.created_at
+	},
+	popular_hashtags: payload.statuses.*entities.hashtags..text distinctBy $
+}]]></ee:set-payload>
+			</ee:message>
+			<ee:variables >
+			</ee:variables>
+		</ee:transform>
+		<logger level="INFO" doc:name="Log End" doc:id="a3ac6194-bb14-40bc-b387-8d24c1991957" message="Sucess response is sent!" category="com.bofa.api.twitter-demo"/>
+	</sub-flow>
+</mule>

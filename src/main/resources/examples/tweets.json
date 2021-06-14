@@ -1,0 +1,210 @@
+{
+    "statuses": [
+        {
+            "created_at": "Sat Jun 12 16:24:30 +0000 2021",
+            "id": 1403750064279851013,
+            "id_str": "1403750064279851013",
+            "full_text": "Happy to share some POSITIVE news with you. I have tested covid NEGATIVE. Recovered and ready to return to work. But before I do that, I want to thank all of you for your #GetWellSoon wishes and prayers. Join me LIVE on Facebook at 5pm tomorrow. https://t.co/CTOSqGsiLx",
+            "truncated": false,
+            "display_text_range": [
+                0,
+                245
+            ],
+            "entities": {
+                "hashtags": [
+                    {
+                        "text": "GetWellSoon",
+                        "indices": [
+                            171,
+                            183
+                        ]
+                    }
+                ],
+                "symbols": [],
+                "user_mentions": [],
+                "urls": [],
+                "media": [
+                    {
+                        "id": 1403750054775590914,
+                        "id_str": "1403750054775590914",
+                        "indices": [
+                            246,
+                            269
+                        ],
+                        "media_url": "http://pbs.twimg.com/media/E3sfPMhVkAIOeHJ.jpg",
+                        "media_url_https": "https://pbs.twimg.com/media/E3sfPMhVkAIOeHJ.jpg",
+                        "url": "https://t.co/CTOSqGsiLx",
+                        "display_url": "pic.twitter.com/CTOSqGsiLx",
+                        "expanded_url": "https://twitter.com/sudhirchaudhary/status/1403750064279851013/photo/1",
+                        "type": "photo",
+                        "sizes": {
+                            "thumb": {
+                                "w": 150,
+                                "h": 150,
+                                "resize": "crop"
+                            },
+                            "medium": {
+                                "w": 904,
+                                "h": 1200,
+                                "resize": "fit"
+                            },
+                            "large": {
+                                "w": 964,
+                                "h": 1280,
+                                "resize": "fit"
+                            },
+                            "small": {
+                                "w": 512,
+                                "h": 680,
+                                "resize": "fit"
+                            }
+                        }
+                    }
+                ]
+            },
+            "extended_entities": {
+                "media": [
+                    {
+                        "id": 1403750054775590914,
+                        "id_str": "1403750054775590914",
+                        "indices": [
+                            246,
+                            269
+                        ],
+                        "media_url": "http://pbs.twimg.com/media/E3sfPMhVkAIOeHJ.jpg",
+                        "media_url_https": "https://pbs.twimg.com/media/E3sfPMhVkAIOeHJ.jpg",
+                        "url": "https://t.co/CTOSqGsiLx",
+                        "display_url": "pic.twitter.com/CTOSqGsiLx",
+                        "expanded_url": "https://twitter.com/sudhirchaudhary/status/1403750064279851013/photo/1",
+                        "type": "photo",
+                        "sizes": {
+                            "thumb": {
+                                "w": 150,
+                                "h": 150,
+                                "resize": "crop"
+                            },
+                            "medium": {
+                                "w": 904,
+                                "h": 1200,
+                                "resize": "fit"
+                            },
+                            "large": {
+                                "w": 964,
+                                "h": 1280,
+                                "resize": "fit"
+                            },
+                            "small": {
+                                "w": 512,
+                                "h": 680,
+                                "resize": "fit"
+                            }
+                        }
+                    }
+                ]
+            },
+            "metadata": {
+                "result_type": "popular",
+                "iso_language_code": "en"
+            },
+            "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "in_reply_to_screen_name": null,
+            "user": {
+                "id": 75246346,
+                "id_str": "75246346",
+                "name": "Sudhir Chaudhary",
+                "screen_name": "sudhirchaudhary",
+                "location": "ÜT: 28.562395,77.33867",
+                "description": "Editor In Chief & CEO , Zee News, WION, Zee Business. Hosts India's No.1 News Show DNA.Ramnath Goenka Awardee https://t.co/mR8AzsmCw2",
+                "url": "https://t.co/edqKC1AZFH",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "url": "https://t.co/edqKC1AZFH",
+                                "expanded_url": "http://www.facebook.com/sudhirchaudhary.72",
+                                "display_url": "facebook.com/sudhirchaudhar…",
+                                "indices": [
+                                    0,
+                                    23
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": [
+                            {
+                                "url": "https://t.co/mR8AzsmCw2",
+                                "expanded_url": "https://www.instagram.com/sudhirchaudhary72/",
+                                "display_url": "instagram.com/sudhirchaudhar…",
+                                "indices": [
+                                    110,
+                                    133
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "protected": false,
+                "followers_count": 6375838,
+                "friends_count": 121,
+                "listed_count": 1707,
+                "created_at": "Fri Sep 18 10:08:30 +0000 2009",
+                "favourites_count": 848,
+                "utc_offset": null,
+                "time_zone": null,
+                "geo_enabled": true,
+                "verified": true,
+                "statuses_count": 30083,
+                "lang": null,
+                "contributors_enabled": false,
+                "is_translator": false,
+                "is_translation_enabled": false,
+                "profile_background_color": "C0DEED",
+                "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": true,
+                "profile_image_url": "http://pbs.twimg.com/profile_images/979311951456055296/nN4E7f5K_normal.jpg",
+                "profile_image_url_https": "https://pbs.twimg.com/profile_images/979311951456055296/nN4E7f5K_normal.jpg",
+                "profile_banner_url": "https://pbs.twimg.com/profile_banners/75246346/1476440891",
+                "profile_link_color": "0084B4",
+                "profile_sidebar_border_color": "FFFFFF",
+                "profile_sidebar_fill_color": "DDEEF6",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "has_extended_profile": true,
+                "default_profile": false,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null,
+                "translator_type": "none",
+                "withheld_in_countries": []
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "is_quote_status": false,
+            "retweet_count": 3643,
+            "favorite_count": 35060,
+            "favorited": false,
+            "retweeted": false,
+            "possibly_sensitive": false,
+            "lang": "en"
+        }
+    ],
+    "search_metadata": {
+        "completed_in": 0.015,
+        "max_id": 0,
+        "max_id_str": "0",
+        "next_results": "?max_id=1403750064279851012&q=covid&count=1&include_entities=1&result_type=popular",
+        "query": "covid",
+        "count": 1,
+        "since_id": 0,
+        "since_id_str": "0"
+    }
+}

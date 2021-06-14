@@ -1,0 +1,22 @@
+#twitter properties
+
+apiId: "16964218"
+
+http:
+  listener:
+    host: "0.0.0.0"
+    port: "8081"
+    path: "/api/v1"
+twitter:
+
+  host: "api.twitter.com"
+  port: "443"
+  version: "1.1"
+  path: "search/tweets.json"
+  token: "AAAAAAAAAAAAAAAAAAAAAI4OHgEAAAAAlbk0HSIAqcc3havrrU9j2NeAQ34%3DzJmzwHuQerd8JJ2TeuHfqwKgBt6bK4tk93w3ocBB2vPuKMF3cG"
+  
+  #to get full text of tweet
+  tweet_mode: "extended"
+  
+  #default result type for searching tweets
+  result_type: "mixed"

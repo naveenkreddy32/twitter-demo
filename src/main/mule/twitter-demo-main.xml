@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd  http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+    <http:listener-config name="twitter-demo-httpListenerConfig">
+        <http:listener-connection host="${http.listener.host}" port="${http.listener.port}" />
+    </http:listener-config>
+    <apikit:config name="twitter-demo-config" api="resource::dca8e727-ce9a-4dc6-b202-4edd350f2b33:twitter-demo:1.0.2:raml:zip:twitter-demo.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <configuration-properties doc:name="Configuration properties" doc:id="59dc2a07-6293-46b8-be3a-94fc76c9df90" file="config/DEV.yaml" />
+    <http:request-config name="HTTPS_Request_configuration" doc:name="HTTP Request configuration" doc:id="87fecf19-7183-4513-8cc7-cf64412e6bca">
+        <http:request-connection protocol="HTTPS" host="${twitter.host}" port="${twitter.port}" />
+    </http:request-config>
+    <api-gateway:autodiscovery apiId="${apiId}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="e8cd24ac-47d9-422d-8030-efdba041266a" flowRef="twitter-demo-main" />
+    <flow name="twitter-demo-main">
+        <http:listener config-ref="twitter-demo-httpListenerConfig" path="${http.listener.path}/*">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body><![CDATA[#[payload]]]></http:body>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
+            </http:error-response>
+        </http:listener>
+        <apikit:router config-ref="twitter-demo-config" />
+        <error-handler ref="global-exception-handler" />
+    </flow>
+    <flow name="get:\tweets\search:twitter-demo-config">
+        <flow-ref doc:name="tweets-search-impl-subflow" doc:id="edfa2b07-8f67-4d48-8a81-c32ab3d1a61d" name="tweets-search-impl-subflow" />
+    </flow>
+</mule>
