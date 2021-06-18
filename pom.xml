@@ -63,7 +63,7 @@
     	<dependency>
             <groupId>dca8e727-ce9a-4dc6-b202-4edd350f2b33</groupId>
             <artifactId>twitter-demo</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
             <classifier>raml</classifier>
             <type>zip</type>
         </dependency>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:validation="http://www.mulesoft.org/schema/mule/validation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd">
+	<sub-flow name="common-twitter-invocation-subflow" doc:id="2297a773-567f-4177-bcbb-4b23ddc12c16" >
+		<set-variable value="#[attributes.queryParams]" doc:name="save queryParams" doc:id="82f6e9b3-b674-407f-b5c3-d6065630f942" variableName="queryParams"/>
+		<logger level="DEBUG" doc:name="Log Input Params" doc:id="35229a79-34d1-4076-9f2a-c651f3044c09" message="Received Input Params are: #[vars.queryParams]" category="com.bofa.api.twitter-demo" />
+		<validation:is-not-blank-string doc:name="Is queryString blank?" doc:id="cfcb34d6-418b-46b6-a8d1-e07239bfa001" value="#[vars.queryParams.queryString]" message="queryString is blank"/>
+		<http:request method="GET" doc:name="Call Twitter API" doc:id="a9d71c50-8f49-423f-87d2-35b2548d60b0" config-ref="HTTPS_Request_configuration" path="/${twitter.version}/${twitter.path}" sendCorrelationId="ALWAYS">
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"Authorization" : "Bearer " ++ p('twitter.token')
+}]]]></http:headers>
+			<http:query-params ><![CDATA[#[output application/java
+var qp = vars.queryParams
+---
+{
+	"q" : qp.queryString,
+	"count": qp.count,
+	"tweet_mode": p('twitter.tweet_mode'),
+	"result_type": qp.result_type default p('twitter.result_type')
+}]]]></http:query-params>
+		</http:request></sub-flow>
+</mule>

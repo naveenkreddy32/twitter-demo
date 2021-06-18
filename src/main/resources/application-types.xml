@@ -175,6 +175,9 @@ type twitter_response = {|
 
 ]]></types:shape>
     </types:type>
+    <types:type name="HttpRequestAttributes" format="java">
+      <types:shape format="java" element="org.mule.extension.http.api.HttpRequestAttributes"/>
+    </types:type>
   </types:catalog>
   <types:enrichment select="#899cfcb4-edfd-4cb7-b45c-64e09c67ad0c">
     <types:processor-declaration>
@@ -188,6 +191,33 @@ type twitter_response = {|
           <types:payload type="final_response"/>
         </types:message>
       </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#20976af3-4f75-4a80-a435-66e4bed6f1ec">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:attributes type="HttpRequestAttributes"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#c45badfc-152b-4709-b817-a7354612ff16">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:attributes type="HttpRequestAttributes"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#2297a773-567f-4177-bcbb-4b23ddc12c16">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:attributes type="HttpRequestAttributes"/>
+        </types:message>
+      </types:input-event>
     </types:processor-declaration>
   </types:enrichment>
 </types:mule>

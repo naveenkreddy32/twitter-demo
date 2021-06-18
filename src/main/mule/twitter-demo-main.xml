@@ -3,7 +3,7 @@
     <http:listener-config name="twitter-demo-httpListenerConfig">
         <http:listener-connection host="${http.listener.host}" port="${http.listener.port}" />
     </http:listener-config>
-    <apikit:config name="twitter-demo-config" api="resource::dca8e727-ce9a-4dc6-b202-4edd350f2b33:twitter-demo:1.0.2:raml:zip:twitter-demo.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <apikit:config name="twitter-demo-config" api="resource::dca8e727-ce9a-4dc6-b202-4edd350f2b33:twitter-demo:1.0.3:raml:zip:twitter-demo.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <configuration-properties doc:name="Configuration properties" doc:id="59dc2a07-6293-46b8-be3a-94fc76c9df90" file="config/DEV.yaml" />
     <http:request-config name="HTTPS_Request_configuration" doc:name="HTTP Request configuration" doc:id="87fecf19-7183-4513-8cc7-cf64412e6bca">
         <http:request-connection protocol="HTTPS" host="${twitter.host}" port="${twitter.port}" />
@@ -19,10 +19,17 @@
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:error-response>
         </http:listener>
-        <apikit:router config-ref="twitter-demo-config" />
+        <apikit:router config-ref="twitter-demo-config" doc:name="Twitter APIKIT"/>
         <error-handler ref="global-exception-handler" />
     </flow>
-    <flow name="get:\tweets\search:twitter-demo-config">
-        <flow-ref doc:name="tweets-search-impl-subflow" doc:id="edfa2b07-8f67-4d48-8a81-c32ab3d1a61d" name="tweets-search-impl-subflow" />
+    <flow name="get:\tweets\hashtags:twitter-demo-config">
+		<logger level="INFO" doc:name="Log Start" doc:id="6c3ae7ec-0352-426e-8b03-b04add29325c" message="Processing the get popular hastag request...." category="com.bofa.api.twitter-demo"/>
+		<flow-ref doc:name="hashtags-retrieval-popular-impl-subflow" doc:id="20976af3-4f75-4a80-a435-66e4bed6f1ec" name="hashtags-retrieval-popular-impl-subflow"/>
+		<logger level="INFO" doc:name="Log End" doc:id="39778cdd-fc93-4936-9837-5f04f88bc69e" message="Sucess response is sent for get popular hastag request!" category="com.bofa.api.twitter-demo"/>
+    </flow>
+    <flow name="get:\tweets:twitter-demo-config">
+		<logger level="INFO" doc:name="Log Start" doc:id="6350e885-23ea-42bb-ab48-58054bb76bda" category="com.bofa.api.twitter-demo" message="Processing the get tweets request...."/>
+		<flow-ref doc:name="tweets-search-impl-subflow" doc:id="c45badfc-152b-4709-b817-a7354612ff16" name="tweets-search-impl-subflow"/>
+		<logger level="INFO" doc:name="Log End" doc:id="11aad014-57e7-4784-9be0-c35f5fd49e8a" category="com.bofa.api.twitter-demo" message="Sucess response is sent for get tweets request!"/>
     </flow>
 </mule>
